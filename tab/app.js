@@ -8,6 +8,9 @@ const LOAD_TIMEOUT = 1000
 let timeoutChecker = null
 
 document.addEventListener("DOMContentLoaded", () => {
+    const colors = ["##ffdede", "#fffac4", "#e9f9d6", "#daf3ff", "#f8deff", "#ACF1E8", "#fde2e4", "#e2ece9", "#cddafd", "#eae4e9", "#fff1e6","#fde2e4","#fad2e1","#dfe7fd"]; // Lista kolorów
+    const randomColor = colors[Math.floor(Math.random() * colors.length)]; // Wybierz losowy kolor
+    document.documentElement.style.setProperty("--background", randomColor); // Ustaw kolor jako zmienną CSS
     const image = document.querySelector("img.cat");
     const THRESHOLD = 15;
 
@@ -39,7 +42,7 @@ document.addEventListener("DOMContentLoaded", () => {
             perspective(${e.currentTarget.clientWidth}px)
             rotateX(0deg)
             rotateY(0deg)
-            scale(0.9)
+            scale(0.7)
         `;
     }
 

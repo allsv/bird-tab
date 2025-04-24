@@ -1,6 +1,6 @@
 :root {
     /* dark theme is default */
-    --background: #212121;
+    --background: #fbf1ea;
     --text: #ffffff;
 }
 
@@ -19,7 +19,7 @@ img.cat {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%) scale(0.9); /* Start smaller */
+    transform: translate(-50%, -50%) scale(0.7); /* Start smaller */
     z-index: -1;
 
     color: #fff;
@@ -33,8 +33,8 @@ img.cat {
 }
 
 img.cat:hover {
-    transform: translate(-50%, -50%) scale(1); /* Grow to normal size */
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3), 0 12px 24px rgba(0, 0, 0, 0.25); /* Enhanced shadow on hover */
+    transform: translate(-50%, -50%) scale(0.8); /* Grow to normal size */
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3), 0 16px 32px rgba(0, 0, 0, 0.25); /* Enhanced shadow on hover */
 }
 
 img.cat:hover .content {
