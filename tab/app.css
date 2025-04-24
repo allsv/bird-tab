@@ -11,13 +11,38 @@ html {
 }
 
 img.cat {
+    background-color: #333; /* Fill color */
+    max-width: 500px;
+    margin: auto;
+    height: auto;
+
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%) scale(0.9); /* Start smaller */
     z-index: -1;
 
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
+    color: #fff;
+    border-radius: 5%; /* Rounded edges */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Default shadow */
+    border: 5px solid #ffffff; /* Optional border */
+
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth animation */
+    transform-style: preserve-3d; /* Enable 3D transformations */
+    will-change: transform, box-shadow; /* Optimize for performance */
+}
+
+img.cat:hover {
+    transform: translate(-50%, -50%) scale(1); /* Grow to normal size */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3), 0 12px 24px rgba(0, 0, 0, 0.25); /* Enhanced shadow on hover */
+}
+
+img.cat:hover .content {
+    transform: translateZ(12px); /* Slight parallax effect on hover */
+}
+
+.content {
+    position: relative;
+    z-index: 1;
+    transition: transform 0.3s ease;
 }
