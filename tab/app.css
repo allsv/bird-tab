@@ -2,6 +2,7 @@
     /* dark theme is default */
     --background: #fbf1ea;
     --text: #ffffff;
+    font-family: 'Arial', sans-serif;
 }
 
 html {
@@ -39,6 +40,33 @@ img.cat:hover {
 
 img.cat:hover .content {
     transform: translateZ(12px); /* Slight parallax effect on hover */
+}
+
+.bird-title {
+    font-size: 4rem; /* Duży rozmiar czcionki */
+    font-weight: bold; /* Pogrubienie tekstu */
+    color: transparent; /* Tekst jest przezroczysty */
+    background-image: linear-gradient(90deg, #EF9C66, #78ABA8, #FFCCEA); /* Gradient zamiast obrazu */
+    background-size: 200%; /* Powiększone tło dla płynnej animacji */
+    background-position: 0 50%;
+    background-clip: text;
+    -webkit-background-clip: text; /* Wsparcie dla WebKit */
+    -webkit-text-fill-color: transparent; /* Wsparcie dla WebKit */
+    animation: animate-background 5s infinite alternate linear; /* Animacja tła */
+    text-align: center; /* Wyśrodkowanie tekstu */
+    margin: 50px 0; /* Odstępy nad i pod tytułem */
+    filter: drop-shadow(4px 4px 2px rgba(255, 255, 255, 1)); /* Subtelny cień elementu */
+}
+
+
+/* Animacja przesuwania tła */
+@keyframes animate-background {
+    0% {
+        background-position: 0 50%;
+    }
+    100% {
+        background-position: 100% 50%;
+    }
 }
 
 .content {

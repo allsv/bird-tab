@@ -11,6 +11,18 @@ document.addEventListener("DOMContentLoaded", () => {
     const colors = ["##ffdede", "#fffac4", "#e9f9d6", "#daf3ff", "#f8deff", "#ACF1E8", "#fde2e4", "#e2ece9", "#cddafd", "#eae4e9", "#fff1e6","#fde2e4","#fad2e1","#dfe7fd"]; // Lista kolorów
     const randomColor = colors[Math.floor(Math.random() * colors.length)]; // Wybierz losowy kolor
     document.documentElement.style.setProperty("--background", randomColor); // Ustaw kolor jako zmienną CSS
+    // Lista słów opisujących ptaki
+    const adjectives = ["Majestic", "Graceful", "Swift", "Colorful", "Elegant", "Vibrant"];
+    const nouns = ["Sparrow", "Eagle", "Parrot", "Falcon", "Robin", "Hummingbird"];
+
+    // Wybierz dwa losowe słowa
+    const randomAdjective = adjectives[Math.floor(Math.random() * adjectives.length)];
+    const randomNoun = nouns[Math.floor(Math.random() * nouns.length)];
+
+    // Ustaw tytuł
+    const titleElement = document.querySelector(".bird-title");
+    titleElement.textContent = `${randomAdjective} ${randomNoun}`;
+
     const image = document.querySelector("img.cat");
     const THRESHOLD = 15;
 
