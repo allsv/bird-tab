@@ -8,23 +8,20 @@ const LOAD_TIMEOUT = 1000
 let timeoutChecker = null
 
 document.addEventListener("DOMContentLoaded", () => {
-    const colors = ["##ffdede", "#fffac4", "#e9f9d6", "#daf3ff", "#f8deff", "#ACF1E8", "#fde2e4", "#e2ece9", "#cddafd", "#eae4e9", "#fff1e6","#fde2e4","#fad2e1","#dfe7fd"]; // Lista kolorów
-    const randomColor = colors[Math.floor(Math.random() * colors.length)]; // Wybierz losowy kolor
-    document.documentElement.style.setProperty("--background", randomColor); // Ustaw kolor jako zmienną CSS
-    // Lista słów opisujących ptaki
+    const colors = ["#ffdede", "#fffac4", "#e9f9d6", "#daf3ff", "#f8deff", "#ACF1E8", "#fde2e4", "#e2ece9", "#cddafd", "#eae4e9", "#fff1e6", "#fde2e4", "#fad2e1", "#dfe7fd"];
+    const randomColor = colors[Math.floor(Math.random() * colors.length)];
+    document.documentElement.style.setProperty("--background", randomColor);
+
     const adjectives = ["Majestic", "Graceful", "Swift", "Colorful", "Elegant", "Vibrant"];
     const nouns = ["Sparrow", "Eagle", "Parrot", "Falcon", "Robin", "Hummingbird"];
-
-    // Wybierz dwa losowe słowa
     const randomAdjective = adjectives[Math.floor(Math.random() * adjectives.length)];
     const randomNoun = nouns[Math.floor(Math.random() * nouns.length)];
 
-    // Ustaw tytuł
     const titleElement = document.querySelector(".bird-title");
     titleElement.textContent = `${randomAdjective} ${randomNoun}`;
 
-    const image = document.querySelector("img.cat");
-    const THRESHOLD = 15;
+    const catContainer = document.querySelector(".cat");
+    const THRESHOLD = 10;
 
     function handleHover(e) {
         const { clientX, clientY, currentTarget } = e;
@@ -38,17 +35,18 @@ document.addEventListener("DOMContentLoaded", () => {
         const rotateX = (THRESHOLD / 2 - vertical * THRESHOLD).toFixed(2);
         const rotateY = (horizontal * THRESHOLD - THRESHOLD / 2).toFixed(2);
 
-        // Keep the image centered with translate(-50%, -50%)
+        // Apply the transform to the .cat div
         currentTarget.style.transform = `
             translate(-50%, -50%)
             perspective(${clientWidth}px)
             rotateX(${rotateX}deg)
             rotateY(${rotateY}deg)
+            scale(0.8)
         `;
     }
 
     function resetStyles(e) {
-        // Reset transform to keep the image centered
+        // Reset transform to keep the .cat div centered
         e.currentTarget.style.transform = `
             translate(-50%, -50%)
             perspective(${e.currentTarget.clientWidth}px)
@@ -58,32 +56,42 @@ document.addEventListener("DOMContentLoaded", () => {
         `;
     }
 
-    image.addEventListener("mousemove", handleHover);
-    image.addEventListener("mouseleave", resetStyles);
+    // Add event listeners to the .cat div
+    catContainer.addEventListener("mousemove", handleHover);
+    catContainer.addEventListener("mouseleave", resetStyles);
 
-    // Zachowanie istniejących funkcji
-    image.onerror = () => {
-        image.src = pickCatFromLocal();
-    };
+    const iframeLinks = [
+        "https://macaulaylibrary.org/asset/634338890/embed",
+        "https://macaulaylibrary.org/asset/634338785/embed",
+        "https://macaulaylibrary.org/asset/634343551/embed",
+        "https://macaulaylibrary.org/asset/634344244/embed",
+        "https://macaulaylibrary.org/asset/634345756/embed"
+    ];
 
-    image.onload = () => {
-        clearTimeout(timeoutChecker);
-    };
+    function setRandomTitle() {
+        const adjectives = ["Majestic", "Graceful", "Swift", "Colorful", "Elegant", "Vibrant"];
+        const nouns = ["Sparrow", "Eagle", "Parrot", "Falcon", "Robin", "Hummingbird"];
+        const randomAdjective = adjectives[Math.floor(Math.random() * adjectives.length)];
+        const randomNoun = nouns[Math.floor(Math.random() * nouns.length)];
+        const titleElement = document.querySelector(".bird-title");
+        titleElement.textContent = `${randomAdjective} ${randomNoun}`;
+    }
 
-    const SetRandomCatImage = () => {
-        image.src = pickCatImage();
-        timeoutChecker = setTimeout(() => image.onerror(), LOAD_TIMEOUT);
-    };
+    function setRandomIframe() {
+        catContainer.innerHTML = ""; // Clear previous iframe
+        const randomIframe = iframeLinks[Math.floor(Math.random() * iframeLinks.length)];
+        const iframe = document.createElement("iframe");
+        iframe.src = randomIframe;
+        iframe.allowFullscreen = true;
+        catContainer.appendChild(iframe);
+    }
 
-    fileListUpdateHandler();
-    SetRandomCatImage();
+    setRandomIframe();
 
     document.addEventListener("keypress", (event) => {
-        switch (event.key) {
-            case "r":
-            case "R":
-                SetRandomCatImage();
-                break;
+        if (event.key === "r" || event.key === "R") {
+            setRandomIframe();
+            setRandomTitle();
         }
     });
 });

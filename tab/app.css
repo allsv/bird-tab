@@ -11,35 +11,40 @@ html {
     overflow: hidden;
 }
 
-img.cat {
-    background-color: #333; /* Fill color */
-    max-width: 500px;
-    margin: auto;
-    height: auto;
-
+.cat {
+    display: flex; /* Enable flexbox */
+    justify-content: center; /* Horizontally center the iframe */
+    align-items: center;
+    background-color: #e5e3dc; /* Fill color */
+    width: 50%; /* Make the container responsive */
+    height: 90%;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%) scale(0.7); /* Start smaller */
     z-index: -1;
-
     color: #fff;
     border-radius: 5%; /* Rounded edges */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Default shadow */
     border: 5px solid #ffffff; /* Optional border */
-
     transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth animation */
     transform-style: preserve-3d; /* Enable 3D transformations */
     will-change: transform, box-shadow; /* Optimize for performance */
+    overflow: hidden; /* Keep contents within the rounded borders */
 }
 
-img.cat:hover {
+.cat:hover {
     transform: translate(-50%, -50%) scale(0.8); /* Grow to normal size */
     box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3), 0 16px 32px rgba(0, 0, 0, 0.25); /* Enhanced shadow on hover */
 }
 
-img.cat:hover .content {
-    transform: translateZ(12px); /* Slight parallax effect on hover */
+.cat iframe {
+    background-color: #e5e3dc;
+    width: 60%; /* Fill the container */
+    height: 60%;
+    border: none; /* Remove iframe border */
+    transform: scale(1.4); /* Scale up the iframe content */
+    transform-origin: center; /* Scale from center */
 }
 
 .bird-title {
@@ -57,7 +62,6 @@ img.cat:hover .content {
     margin: 50px 0; /* Odstępy nad i pod tytułem */
     filter: drop-shadow(4px 4px 2px rgba(255, 255, 255, 1)); /* Subtelny cień elementu */
 }
-
 
 /* Animacja przesuwania tła */
 @keyframes animate-background {
