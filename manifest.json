@@ -1,8 +1,8 @@
 {
-    "name": "Cat Tab",
-    "version": "1.4.2",
-    "author": "chick_0",
-    "description": "Meet the cat on the new tab.",
+    "name": "Pigeoncote - The Pigeon Tab",
+    "version": "1.0.0",
+    "author": "infcat",
+    "description": "Meet pigeons on your new tab page!",
     "chrome_url_overrides" : {
         "newtab": "tab/app.html"
     },
@@ -16,7 +16,7 @@
     },
     "browser_specific_settings": {
         "gecko": {
-            "id": "cat-ext@ch1ck.xyz", 
+            "id": "pigeoncote-tab@infcat.xyz", 
             "strict_min_version": "100.0"
         }
     },
