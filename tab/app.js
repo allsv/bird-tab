@@ -34,11 +34,12 @@ document.addEventListener("DOMContentLoaded", () => {
         // Weirdo
         "Shabby", "Whimsical", "Loopy", "Grumbling", "Paranormal", "Ethereal",
         "Voidwing", "Vaporfeather", "Cosmic", "Time-lost", "Static", "Lucid",
-        "Wyrd", "Inbetweener", "Unnested", "Fogspun", "Tangled", "Mystic",
+        "Wyrd", "Inbetweener", "Unnested", "Fogspun", "Tangled", "Mystic", "Wild", "Feral",
         // Fun
         "Zany", "Jolly", "Frolicsome", "Giggly", "Exuberant", "Bouncy", "Startled",
         "Fluffy", "Plump", "Sassy", "Skippy", "Bready", "Zippy", "Peppy", "Derpy",
-        "Swooshy", "Boingy", "Chirpy", "Bubbly", "Goofy", "Bumbly",
+        "Swooshy", "Boingy", "Chirpy", "Bubbly", "Goofy", "Bumbly", "Silly",
+        "Flirty", "Eepy", "Round", "Squishy", "Premium", "Shiny", "Unhoused",
         // Pompous
         "Noble", "Enchanting", "Majestic", "Distinguished", "Regal", "Valorous", "Intrepid",
         "Sacred", "Celestial", "Grove-born", "Whispered", "Prancing", "Iridescent",
@@ -51,7 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
         "Woodlander", "Clearcut", "Driftwood", "Acorn", "Burrow", "Bracken",
         "Whistle", "Murmur", "Rustle", "Pebble", "Bramble", "Leaflet", "Fernlet", "Percher",
         "Breezelet", "Twig", "Grovelet", "Doveling", "Tree-hugger", "Forestbaby",
-        "Barley", "Poppyseed", "Dandelion",
+        "Barley", "Poppyseed", "Dandelion", "Hag", "Barbarian", "Enchanted Prince",
         // Pretty
         "Trinket", "Winklet", "Snugglebutt", "Ribbon", "Keepsake", "Navigator",
         "Flutter", "Cuddler", "Poem", "Snuggler", "Petal", "Blush", "Softie", "Ballad",
@@ -64,11 +65,11 @@ document.addEventListener("DOMContentLoaded", () => {
         "Frystealer", "Trashbucket", "Plop", "Snacklord", "Crumb", "Pooplet", "Breadbag", "Plopper",
         "Wingdealer", "Biscuit", "Curbster", "Poopster", "Roofboy", "Antennaboy", "Greaseball",
         "Skyrat (non-derogatory)", "Zoomie", "Skatebirder", "Loaf", "Sidewalk Guardian", "Bus Stop Menace",
-        "Potato", "Pickle", "Agent", "Spy", "Government Drone",
+        "Potato", "Pickle", "Agent", "Spy", "Government Drone", "Hamburger",
         // Surreal
         "Mirage", "Constellation", "Inkling", "Twilight", "Pinecone", "Waddler", "Strutter",
         "Glimmer", "Fade", "Spark", "Shade", "Silhouette", "Ripple", "Omen", "Haunt", "Whisper",
-        "Memory", "Prism", "Blink", "Flicker", "Glint", "Pudge", "Nugget"
+        "Memory", "Prism", "Blink", "Flicker", "Glint", "Pudge", "Nugget", "Busybody"
     ];
 
     const randomAdjective = adjectives[Math.floor(Math.random() * adjectives.length)];
