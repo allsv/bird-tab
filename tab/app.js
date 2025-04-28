@@ -21,51 +21,54 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const adjectives = [
         // Pretty
-        "Rosy", "Glimmering", "Dainty", "Gleaming", "Graceful",
-        "Feathered", "Whimsical", "Dandelion",
-        "Dewy", "Gentle", "Dovely", "Balladowa", "Dreamy", "Cuddle-feathered",
+        "Rosy", "Glimmering", "Dainty", "Gleaming", "Graceful", "Cuddle-feathered",
+        "Feathered", "Whimsical", "Dewy", "Gentle", "Dovely", "Dreamy", "Swift", "Delicate",
         // Forest
         "Meadowy", "Brambly", "Piney", "Ferny", "Overgrown", "Arboreal",
-        "Mossy", "Wildfeather", "Brambly", "Foggy",
-        "Hollow", "Meadowbound", "Pebbled", "Branchy", "Nestled",
+        "Mossy", "Wildfeather", "Brambly", "Foggy", "Foraging", "Resilient",
+        "Hollow", "Meadowbound", "Pebbled", "Branchy", "Nestled", "Sedentary",
         // City
-        "Sooty", "Trashy", "Rusty", "Dingy",
-        "Asphalt", "Trash-hunting", "Breadcore", "Fry-thief", "Alleywise", "Subway", "Streetshined",
-        "Chimneyflap", "Rooftopped", "Urbanite",
+        "Sooty", "Trashy", "Rusty", "Dingy", "Scouting", "Sneaky", "Underhanded",
+        "Asphalt", "Trash-hunting", "Breadcrumb Covered", "Thieving", "Alleywise", "Subway",
+        "Streetshined", "Chimneyflap", "Rooftopped", "Urbanite", "Awning", "Windowsill",
         // Weirdo
         "Shabby", "Whimsical", "Loopy", "Grumbling", "Paranormal", "Ethereal",
         "Voidwing", "Vaporfeather", "Cosmic", "Time-lost", "Static", "Lucid",
-        "Wyrd", "Inbetweener", "Unnested", "Fogspun", "Tangled",
-        "Mystic",
+        "Wyrd", "Inbetweener", "Unnested", "Fogspun", "Tangled", "Mystic",
         // Fun
-        "Zany", "Jolly", "Frolicsome", "Giggly", "Exuberant",
+        "Zany", "Jolly", "Frolicsome", "Giggly", "Exuberant", "Bouncy", "Startled",
         "Fluffy", "Plump", "Sassy", "Skippy", "Bready", "Zippy", "Peppy", "Derpy",
         "Swooshy", "Boingy", "Chirpy", "Bubbly", "Goofy", "Bumbly",
         // Pompous
-        "Noble", "Enchanting", "Majestic",
-        "Sacred", "Celestial", "Grove-born", "Whispered",
-        "Spiritcoated", "Mythic", "Feyplumed", "Ancient", "Shrine-perched", "Skyseer", "Rune-feathered"
+        "Noble", "Enchanting", "Majestic", "Distinguished", "Regal", "Valorous", "Intrepid",
+        "Sacred", "Celestial", "Grove-born", "Whispered", "Prancing", "Iridescent",
+        "Spiritcoated", "Mythic", "Feyplumed", "Ancient", "Shrine-perched", "Rune-feathered"
     ];
 
     const nouns = [
         // Forest
-        "Pecker", "Thicket", "Mossball", "Buzzleaf", "Fungus",
+        "Pecker", "Thicket", "Mossball", "Buzzleaf", "Fungus", "Nomad", "Sprout",
         "Woodlander", "Clearcut", "Driftwood", "Acorn", "Burrow", "Bracken",
         "Whistle", "Murmur", "Rustle", "Pebble", "Bramble", "Leaflet", "Fernlet", "Percher",
         "Breezelet", "Twig", "Grovelet", "Doveling", "Tree-hugger", "Forestbaby",
+        "Barley", "Poppyseed", "Dandelion",
         // Pretty
-        "Trinket", "Winklet", "Snugglebutt", "Iridescence", "Ribbon", "Keepsake",
+        "Trinket", "Winklet", "Snugglebutt", "Ribbon", "Keepsake", "Navigator",
         "Flutter", "Cuddler", "Poem", "Snuggler", "Petal", "Blush", "Softie", "Ballad",
-        "Hush", "Cooer", "Glance", "Pulse", "Tremble", "Quiver",
+        "Hush", "Cooer", "Glance", "Pulse", "Tremble", "Quiver", "Toe-tapper", "Bobblehead",
+        "Baby", "Angel", "Peanut", "Messenger", "Carrier", "Noodle", "Muffin", "Pudding",
+        "Biscuit", "Waffle", "Crumb", "Pretzel", "Nestseeker", "Park Dweller", "Squab",
         // Urban
         "Greaseball", "Chimney", "Underpass", "Streetlamp", "Warehouseman", "Skyliner", "Scramble",
-        "Turnpike",
+        "Turnpike", "Breadthief", "Bagelfinder", "Loafer", "Puddle Hopper", "Fountain Diver",
         "Frystealer", "Trashbucket", "Plop", "Snacklord", "Crumb", "Pooplet", "Breadbag", "Plopper",
         "Wingdealer", "Biscuit", "Curbster", "Poopster", "Roofboy", "Antennaboy", "Greaseball",
+        "Skyrat (non-derogatory)", "Zoomie", "Skatebirder", "Loaf", "Sidewalk Guardian", "Bus Stop Menace",
+        "Potato", "Pickle", "Agent", "Spy", "Government Drone",
         // Surreal
-        "Mirage", "Constellation", "Inkling", "Twilight",
+        "Mirage", "Constellation", "Inkling", "Twilight", "Pinecone", "Waddler", "Strutter",
         "Glimmer", "Fade", "Spark", "Shade", "Silhouette", "Ripple", "Omen", "Haunt", "Whisper",
-        "Memory", "Prism", "Blink", "Flicker", "Glint"
+        "Memory", "Prism", "Blink", "Flicker", "Glint", "Pudge", "Nugget"
     ];
 
     const randomAdjective = adjectives[Math.floor(Math.random() * adjectives.length)];
@@ -116,7 +119,37 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const iframeLinks = [
         "https://macaulaylibrary.org/asset/634338890/embed",
+        "https://macaulaylibrary.org/asset/279264501/embed",
+        "https://macaulaylibrary.org/asset/614294678/embed",
+        "https://macaulaylibrary.org/asset/269115571/embed",
+        "https://macaulaylibrary.org/asset/251813461/embed",
+        "https://macaulaylibrary.org/asset/509730541/embed",
+        "https://macaulaylibrary.org/asset/612363509/embed",
+        "https://macaulaylibrary.org/asset/506528321/embed",
+        "https://macaulaylibrary.org/asset/136516461/embed",
+        "https://macaulaylibrary.org/asset/414719881/embed",
+        "https://macaulaylibrary.org/asset/165443581/embed",
+        "https://macaulaylibrary.org/asset/206163971/embed",
+        "https://macaulaylibrary.org/asset/206020181/embed",
+        "https://macaulaylibrary.org/asset/402927041/embed",
+        "https://macaulaylibrary.org/asset/575722701/embed",
+        "https://macaulaylibrary.org/asset/155407441/embed",
+        "https://macaulaylibrary.org/asset/287287741/embed",
+        "https://macaulaylibrary.org/asset/47132441/embed",
+        "https://macaulaylibrary.org/asset/47132491/embed",
+        "https://macaulaylibrary.org/asset/34481461/embed",
+        "https://macaulaylibrary.org/asset/456698091/embed",
+        "https://macaulaylibrary.org/asset/222764491/embed",
+        "https://macaulaylibrary.org/asset/634588330/embed",
+        "https://macaulaylibrary.org/asset/634581415/embed",
+        "https://macaulaylibrary.org/asset/634579567/embed",
+        "https://macaulaylibrary.org/asset/634579110/embed",
+        "https://macaulaylibrary.org/asset/634577542/embed",
+        "https://macaulaylibrary.org/asset/634576514/embed",
+        "https://macaulaylibrary.org/asset/634586136/embed",
         "https://macaulaylibrary.org/asset/634338785/embed",
+        "https://macaulaylibrary.org/asset/634587331/embed",
+        "https://macaulaylibrary.org/asset/634586448/embed",
         "https://macaulaylibrary.org/asset/634343551/embed",
         "https://macaulaylibrary.org/asset/634344244/embed",
         "https://macaulaylibrary.org/asset/634345756/embed",
@@ -617,7 +650,18 @@ document.addEventListener("DOMContentLoaded", () => {
         "https://macaulaylibrary.org/asset/629565196/embed",
         "https://macaulaylibrary.org/asset/634359514/embed",
         "https://macaulaylibrary.org/asset/634358377/embed",
-        "https://macaulaylibrary.org/asset/634355218/embed"
+        "https://macaulaylibrary.org/asset/634355218/embed",
+        "https://macaulaylibrary.org/asset/634586023/embed",
+        "https://macaulaylibrary.org/asset/634586024/embed",
+        "https://macaulaylibrary.org/asset/634585817/embed",
+        "https://macaulaylibrary.org/asset/634585008/embed",
+        "https://macaulaylibrary.org/asset/634585041/embed",
+        "https://macaulaylibrary.org/asset/634584720/embed",
+        "https://macaulaylibrary.org/asset/634584409/embed",
+        "https://macaulaylibrary.org/asset/634583981/embed",
+        "https://macaulaylibrary.org/asset/634584419/embed",
+        "https://macaulaylibrary.org/asset/634584483/embed"
+
     ];
 
     function setRandomTitle() {
