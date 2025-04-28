@@ -1,6 +1,6 @@
 {
     "name": "Pigeoncote - The Pigeon Tab",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "author": "infcat",
     "description": "Meet pigeons on your new tab page!",
     "chrome_url_overrides" : {
@@ -10,6 +10,7 @@
         "homepage": "tab/app.html"
     },
     "icons": {
+        "48": "icons/48.png",
         "64": "icons/64.png",
         "128": "icons/128.png",
         "192": "icons/192.png"

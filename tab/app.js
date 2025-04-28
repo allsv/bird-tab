@@ -20,29 +20,52 @@ document.addEventListener("DOMContentLoaded", () => {
     document.documentElement.style.setProperty("--background", randomColor);
 
     const adjectives = [
-        // pretty
-        "Heartwing", "Love-drifted", "Honeysigh", "Bluszy", "Lacey", "Feathered", "Whimsy", "Dandelion", "Rosy", "Dewy", "Gentle", "Dovely", "Balladowa", "Dreaming", "Cuddle-feathered", "Petalwing",
-        // forest
-        "Mossy", "Barkbrown", "Tree-hid", "Oakleaf", "Rustleaf", "Wildfeather", "Bramble", "Foggy", "Hollow", "Fernwing", "Meadowbound", "Pebbled", "Branchy", "Nestled",
-        // city
-        "Asphalt", "Trash-hunting", "Breadcore", "Fry-thief", "Alleywise", "Subway", "Streetshined", "Sooty", "Statueborne", "Chimneyflap", "Rooftopped", "Urbanite", "Frycrumbled", "Concretey", "Powerline", "Litterborn",
-        // weirdo
-        "Voidwing", "Vaporfeather", "Cosmic", "Time-lost", "Echoing", "Static", "Otherbeaked", "Lucid", "Wyrd", "Twilightshaped", "Inbetweener", "Hollowborn", "Unnested", "Fogspun", "Tangled",
-        // fun
-        "Fluffy", "Plump", "Sassy", "Skippy", "Bready", "Wigglefeathered", "Zippy", "Peppy", "Derpy", "Swooshy", "Boingy", "Chirpy", "Bubbly", "Dingy", "Goofy", "Bumbly",
-        // pompous
-        "Sacred", "Oracle-winged", "Moonchosen", "Celestial", "Grove-born", "Whispered", "Starshadow", "Spiritcoated", "Mythic", "Feyplumed", "Ancient", "Shrine-perched", "Skyseer", "Rune-feathered"
+        // Pretty
+        "Rosy", "Glimmering", "Dainty", "Gleaming", "Graceful",
+        "Feathered", "Whimsical", "Dandelion",
+        "Dewy", "Gentle", "Dovely", "Balladowa", "Dreamy", "Cuddle-feathered",
+        // Forest
+        "Meadowy", "Brambly", "Piney", "Ferny", "Overgrown", "Arboreal",
+        "Mossy", "Wildfeather", "Brambly", "Foggy",
+        "Hollow", "Meadowbound", "Pebbled", "Branchy", "Nestled",
+        // City
+        "Sooty", "Trashy", "Rusty", "Dingy",
+        "Asphalt", "Trash-hunting", "Breadcore", "Fry-thief", "Alleywise", "Subway", "Streetshined",
+        "Chimneyflap", "Rooftopped", "Urbanite",
+        // Weirdo
+        "Shabby", "Whimsical", "Loopy", "Grumbling", "Paranormal", "Ethereal",
+        "Voidwing", "Vaporfeather", "Cosmic", "Time-lost", "Static", "Lucid",
+        "Wyrd", "Inbetweener", "Unnested", "Fogspun", "Tangled",
+        "Mystic",
+        // Fun
+        "Zany", "Jolly", "Frolicsome", "Giggly", "Exuberant",
+        "Fluffy", "Plump", "Sassy", "Skippy", "Bready", "Zippy", "Peppy", "Derpy",
+        "Swooshy", "Boingy", "Chirpy", "Bubbly", "Goofy", "Bumbly",
+        // Pompous
+        "Noble", "Enchanting", "Majestic",
+        "Sacred", "Celestial", "Grove-born", "Whispered",
+        "Spiritcoated", "Mythic", "Feyplumed", "Ancient", "Shrine-perched", "Skyseer", "Rune-feathered"
     ];
 
     const nouns = [
-        // forest
-        "Nest", "Whistle", "Murmur", "Rustle", "Pebble", "Bramble", "Leaflet", "Fernlet", "Percher", "Drift", "Breezelet", "Twig", "Barkbeak", "Featherfall", "Grovelet", "Doveling", "Tree-hugger", "Glade-bird", "Forestbaby",
-        // pretty
-        "Song", "Flutter", "Cuddle", "Poem", "Snuggletuft", "Petal", "Blush", "Softie", "Ballad", "Hush", "Coowisp", "Glance", "Pulse", "Tremble", "Mistletuft", "Cloudlove", "Quiver", "Secret",
-        // urban
-        "Frystealer", "Trashbucket", "Plop", "Snacklord", "Crumb", "Pooplet", "Breadbag", "Plopperino", "Wingdealer", "Biscuit", "Curbster", "Poopstar", "Rooferino", "Benchghost", "Lintelbaby", "Signalpoo", "Antennaboy", "Greasefeather", "Hoofer",
-        // surreal
-        "Glimmer", "Fade", "Spark", "Shade", "Silhouette", "Ripple", "Omen", "Haunt", "Whisper", "Mirage", "Memory", "Prism", "Blink", "Flicker", "Glint", "Dreamlet", "Paradox", "Quietus"
+        // Forest
+        "Pecker", "Thicket", "Mossball", "Buzzleaf", "Fungus",
+        "Woodlander", "Clearcut", "Driftwood", "Acorn", "Burrow", "Bracken",
+        "Whistle", "Murmur", "Rustle", "Pebble", "Bramble", "Leaflet", "Fernlet", "Percher",
+        "Breezelet", "Twig", "Grovelet", "Doveling", "Tree-hugger", "Forestbaby",
+        // Pretty
+        "Trinket", "Winklet", "Snugglebutt", "Iridescence", "Ribbon", "Keepsake",
+        "Flutter", "Cuddler", "Poem", "Snuggler", "Petal", "Blush", "Softie", "Ballad",
+        "Hush", "Cooer", "Glance", "Pulse", "Tremble", "Quiver",
+        // Urban
+        "Greaseball", "Chimney", "Underpass", "Streetlamp", "Warehouseman", "Skyliner", "Scramble",
+        "Turnpike",
+        "Frystealer", "Trashbucket", "Plop", "Snacklord", "Crumb", "Pooplet", "Breadbag", "Plopper",
+        "Wingdealer", "Biscuit", "Curbster", "Poopster", "Roofboy", "Antennaboy", "Greaseball",
+        // Surreal
+        "Mirage", "Constellation", "Inkling", "Twilight",
+        "Glimmer", "Fade", "Spark", "Shade", "Silhouette", "Ripple", "Omen", "Haunt", "Whisper",
+        "Memory", "Prism", "Blink", "Flicker", "Glint"
     ];
 
     const randomAdjective = adjectives[Math.floor(Math.random() * adjectives.length)];
