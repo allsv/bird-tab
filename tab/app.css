@@ -2,7 +2,7 @@
     /* dark theme is default */
     --background: #fbf1ea;
     --text: #ffffff;
-    font-family: 'Arial', sans-serif;
+    --font-family: 'Noto Sans','Arial', sans-serif;
 }
 
 html {
@@ -11,39 +11,59 @@ html {
     overflow: hidden;
 }
 
+html, body {
+    font-family: var(--font-family);
+    margin: 10;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column; /* Stack elements vertically */
+    align-items: center; /* Center horizontally */
+    justify-content: flex-start; /* Align content to the top */
+}
+
+.cat-wrapper {
+    width: 100%; /* Take full width */
+    max-width: 900px; /* Optional: limit the width */
+    height: 60%;
+    max-height: 1500px;
+    flex-grow: 1; /* Allow the cat-wrapper to grow and fill available space */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* .cat handles scaling, hover effects, and 3D transformations */
 .cat {
     display: flex; /* Enable flexbox */
     justify-content: center; /* Horizontally center the iframe */
+    z-index: 2;
     align-items: center;
     background-color: #e5e3dc; /* Fill color */
-    width: 50%; /* Make the container responsive */
-    height: 90%;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(0.7); /* Start smaller */
-    z-index: -1;
-    color: #fff;
+    width: 100%; /* Fill the wrapper */
+    height: 135%; /* Fill the wrapper */
     border-radius: 5%; /* Rounded edges */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Default shadow */
     border: 5px solid #ffffff; /* Optional border */
     transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth animation */
+    transform: scale(0.7); /* Start at normal size */
     transform-style: preserve-3d; /* Enable 3D transformations */
     will-change: transform, box-shadow; /* Optimize for performance */
     overflow: hidden; /* Keep contents within the rounded borders */
 }
 
 .cat:hover {
-    transform: translate(-50%, -50%) scale(0.8); /* Grow to normal size */
+    transform: scale(0.8); /* Grow to normal size */
     box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3), 0 16px 32px rgba(0, 0, 0, 0.25); /* Enhanced shadow on hover */
 }
 
 .cat iframe {
     background-color: #e5e3dc;
-    width: 60%; /* Fill the container */
-    height: 60%;
+    width: 65%; /* Fill the container */
+    height: 65%;
     border: none; /* Remove iframe border */
-    transform: scale(1.4); /* Scale up the iframe content */
+    transform: scale(1.3); /* Scale up the iframe content */
     transform-origin: center; /* Scale from center */
 }
 
@@ -59,7 +79,8 @@ html {
 
 .bird-title {
     font-size: 3rem; /* Duży rozmiar czcionki */
-    font-weight: bold; /* Pogrubienie tekstu */
+    font-weight: 900; /* Pogrubienie tekstu */
+    letter-spacing: 0.1rem;
     color: transparent; /* Tekst jest przezroczysty */
     background-image: linear-gradient(90deg, #EF9C66, #78ABA8, #F7A4A4); /* Gradient zamiast obrazu */
     background-size: 200%; /* Powiększone tło dla płynnej animacji */
@@ -88,4 +109,169 @@ html {
     position: relative;
     z-index: 1;
     transition: transform 0.3s ease;
+}
+
+.main-content {
+    display: flex;
+    flex-direction: column; /* Stack children vertically */
+    align-items: center; /* Center horizontally */
+    justify-content: flex-start; /* Align content to the top */
+    gap: 20px; /* Add spacing between elements */
+    width: 70%; /* Take full width */
+    flex-grow: 1; /* Allow the main content to grow and fill available space */
+    padding: 20px; /* Add padding around the content */
+    box-sizing: border-box;
+}
+
+.button-container {
+    display: flex;
+    flex-direction: column; /* Stack buttons vertically */
+    align-items: center;
+    gap: 10px; /* Add spacing between buttons */
+    width: 100%; /* Take full width */
+    max-width: 800px; /* Optional: limit the width */
+    flex-grow: 1;
+    overflow-y: auto;
+    flex-shrink: 0;
+}
+
+#user-buttons {
+    display: flex;
+    flex-wrap: wrap; /* Allow buttons to wrap if there are too many */
+    gap: 5px;
+    justify-content: center;
+    margin-top: 10px;
+}
+#settings-buttons {
+    display: flex;
+    flex-wrap: wrap; /* Allow buttons to wrap if there are too many */
+    gap: 5px;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+button {
+    text-transform: lowercase;
+    text-decoration: none;
+    padding: 12px 12px;
+    display: inline-block;
+    border-radius: 100px;
+    transition: all 0.2s;
+    position: relative;
+    font-family: var(--font-family);
+    font-size: 16px;
+    font-weight: thin;
+    border: 2px solid #ffffff;;
+    background-color: #f2e8da65;
+    color: #6f6e67;
+    cursor: pointer;
+    margin-bottom: 5px;
+}
+
+/* Hover effect */
+button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+button:active {
+    transform: translateY(-1px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Background effect */
+button::after {
+    content: "";
+    display: inline-block;
+    height: 100%;
+    width: 100%;
+    border-radius: 100px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    transition: all 0.4s;
+    background-color: #f2e8da65;
+}
+
+button:hover::after {
+    transform: scaleX(1.4) scaleY(1.6);
+    opacity: 0;
+}
+
+/* Animation for buttons */
+button.animated {
+    animation: moveInBottom 0.5s ease-out;
+    animation-fill-mode: backwards;
+}
+
+@keyframes moveInBottom {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0px);
+    }
+}
+
+.cogwheel {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #f2e8da65;
+    border: 2px solid #ffffff;;
+    font-size: 24px;
+    cursor: pointer;
+    color: #333;
+    transition: transform 0.3s ease;
+}
+
+.fontfam {
+    position: absolute;
+    top: 90px;
+    right: 10px;
+    background-color: #f2e8da65;
+    border: 2px solid #ffffff;
+    font-size: 24px;
+    font-family: var(--font-family);
+    cursor: pointer;
+    color: #333;
+    transition: transform 0.3s ease;
+    text-align: center;
+    overflow: hidden; /* Prevent text overflow */
+}
+
+.fontfam::after {
+    content: "font"; /* Text to display on hover */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    font-size: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff; /* Change text color */
+    background-color: rgba(41, 37, 32, 0.2); /* Optional background for hover text */
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.fontfam:hover {
+    color: transparent; /* Hide the default text */
+}
+
+.fontfam:hover::after {
+    opacity: 1; /* Show the hover text */
+}
+
+.cogwheel:hover {
+    transform: rotate(90deg);
+}
+
+.hidden {
+    display: none;
 }

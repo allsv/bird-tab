@@ -5,6 +5,42 @@ const LOAD_TIMEOUT = 1000
 let timeoutChecker = null
 
 document.addEventListener("DOMContentLoaded", () => {
+    const userButtonsContainer = document.getElementById("user-buttons");
+    const addButton = document.getElementById("add-button");
+    const resetButton = document.getElementById("reset-button");
+    const settingsButton = document.getElementById("settings-button");
+    const popularDomains = [
+        { label: "Google", url: "https://www.google.com" },
+        { label: "YouTube", url: "https://www.youtube.com" },
+        { label: "Facebook", url: "https://www.facebook.com" },
+        { label: "Twitter", url: "https://www.x.com" },
+        { label: "Wikipedia", url: "https://www.wikipedia.org" },
+        { label: "Reddit", url: "https://www.reddit.com" },
+        { label: "Last.fm", url: "https://www.last.fm/" }
+    ];
+
+    const fontButton = document.getElementById("font-button");
+
+    // Predefined font families
+    const fontFamilies = [
+        "'Noto Sans', 'Arial', sans-serif",
+        "'Patrick Hand', cursive",
+        "'Comic Sans MS', 'Comic Sans', cursive",
+        "'Atkinson Hyperlegible', sans-serif",
+        "'Eczar', serif;",
+        "'Quintessential', serif",
+        "'Fira Code', monospace",
+        "'Potta One', system-ui"
+    ];
+
+    let currentFontIndex = parseInt(localStorage.getItem("fontIndex")) || 0;
+    document.documentElement.style.setProperty("--font-family", fontFamilies[currentFontIndex]);
+
+    addButton.classList.add("hidden");
+    resetButton.classList.add("hidden");
+    fontButton.classList.add("hidden");
+    // Load saved buttons from localStorage or initialize with popular domains
+    let savedButtons = JSON.parse(localStorage.getItem("userButtons")) || [...popularDomains];
     const colors = [
         "#ffdede", "#fffac4", "#e9f9d6", "#daf3ff", "#f8deff", "#ACF1E8", "#fde2e4",
         "#e2ece9", "#cddafd", "#eae4e9", "#fff1e6", "#fde2e4", "#fad2e1", "#dfe7fd",
@@ -81,37 +117,158 @@ document.addEventListener("DOMContentLoaded", () => {
     const catContainer = document.querySelector(".cat");
     const THRESHOLD = 10;
 
+    if (!localStorage.getItem("userButtons")) {
+        localStorage.setItem("userButtons", JSON.stringify(savedButtons));
+    }
+
+    let isSettingsVisible = false;
+
+    function toggleSettingsVisibility() {
+        isSettingsVisible = !isSettingsVisible;
+
+        // Toggle visibility of the "Add Shortcut" and "Reset Shortcuts" buttons
+        addButton.classList.toggle("hidden", !isSettingsVisible);
+        resetButton.classList.toggle("hidden", !isSettingsVisible);
+        fontButton.classList.toggle("hidden", !isSettingsVisible);
+
+        // Toggle visibility of all "Remove" buttons
+        const removeButtons = document.querySelectorAll(".remove-button");
+        removeButtons.forEach((btn) => btn.classList.toggle("hidden", !isSettingsVisible));
+    }
+
+    settingsButton.addEventListener("click", toggleSettingsVisibility);
+
+    function renderButtons() {
+        userButtonsContainer.innerHTML = ""; // Clear existing buttons
+
+        savedButtons.forEach((button, index) => {
+            const buttonContainer = document.createElement("div"); // Container for the button and remove button
+            buttonContainer.style.display = "flex";
+            buttonContainer.style.alignItems = "center";
+            buttonContainer.style.gap = "10px";
+            buttonContainer.setAttribute("draggable", "true"); // Make the container draggable
+            buttonContainer.dataset.index = index; // Store the index as a data attribute
+
+            const btn = document.createElement("button");
+            btn.textContent = button.label;
+            btn.addEventListener("click", () => {
+                window.open(button.url, "_blank"); // Open the URL in a new tab
+            });
+
+            const removeBtn = document.createElement("button");
+            removeBtn.textContent = "X";
+            removeBtn.classList.add("remove-button", "hidden"); // Add "hidden" class initially
+            removeBtn.style.backgroundColor = "#ff4d4d"; // Red color for remove button
+            removeBtn.style.color = "white";
+            removeBtn.style.border = "none";
+            removeBtn.style.borderRadius = "5px";
+            removeBtn.style.padding = "5px 10px";
+            removeBtn.style.cursor = "pointer";
+
+            removeBtn.addEventListener("click", () => {
+                savedButtons.splice(index, 1); // Remove the button from the array
+                localStorage.setItem("userButtons", JSON.stringify(savedButtons)); // Update localStorage
+                renderButtons(); // Re-render the buttons
+            });
+
+            buttonContainer.appendChild(btn);
+            buttonContainer.appendChild(removeBtn);
+            userButtonsContainer.appendChild(buttonContainer);
+
+            // Drag-and-drop event listeners
+            buttonContainer.addEventListener("dragstart", handleDragStart);
+            buttonContainer.addEventListener("dragover", handleDragOver);
+            buttonContainer.addEventListener("drop", handleDrop);
+        });
+    }
+
+    addButton.addEventListener("click", () => {
+        const label = prompt("Enter button label:");
+        const url = prompt("Enter URL for the shortcut:");
+        if (label && url) {
+            savedButtons.push({ label, url });
+            localStorage.setItem("userButtons", JSON.stringify(savedButtons));
+            renderButtons();
+        }
+    });
+
+    resetButton.addEventListener("click", () => {
+        if (confirm("Are you sure you want to reset all shortcuts? This action cannot be undone.")) {
+            // Clear localStorage and reinitialize with popular domains
+            savedButtons = [...popularDomains];
+            localStorage.setItem("userButtons", JSON.stringify(savedButtons));
+            renderButtons(); // Re-render the buttons
+        }
+    });
+
+    // Render buttons on page load
+    renderButtons();
+
+    // Function to cycle through font families
+    function cycleFontFamily() {
+        currentFontIndex = (currentFontIndex + 1) % fontFamilies.length; // Cycle to the next font
+        const selectedFont = fontFamilies[currentFontIndex];
+        document.documentElement.style.setProperty("--font-family", selectedFont);
+        localStorage.setItem("fontIndex", currentFontIndex); // Save the selected font index
+    }
+
+    // Add event listener to the font button
+    fontButton.addEventListener("click", cycleFontFamily);
+
     function handleHover(e) {
         const { clientX, clientY, currentTarget } = e;
         const { clientWidth, clientHeight } = currentTarget;
         const offsetLeft = currentTarget.getBoundingClientRect().left;
         const offsetTop = currentTarget.getBoundingClientRect().top;
-
+    
         const horizontal = (clientX - offsetLeft) / clientWidth;
         const vertical = (clientY - offsetTop) / clientHeight;
-
+    
         const rotateX = (THRESHOLD / 2 - vertical * THRESHOLD).toFixed(2);
         const rotateY = (horizontal * THRESHOLD - THRESHOLD / 2).toFixed(2);
-
-        // Apply the transform to the .cat div
+    
+        // Apply only the rotation and scale transformations
         currentTarget.style.transform = `
-            translate(-50%, -50%)
             perspective(${clientWidth}px)
             rotateX(${rotateX}deg)
             rotateY(${rotateY}deg)
             scale(0.8)
         `;
     }
-
+    
     function resetStyles(e) {
-        // Reset transform to keep the .cat div centered
+        // Reset only the rotation and scale transformations
         e.currentTarget.style.transform = `
-            translate(-50%, -50%)
             perspective(${e.currentTarget.clientWidth}px)
             rotateX(0deg)
             rotateY(0deg)
             scale(0.7)
         `;
+    }
+
+    let draggedIndex = null;
+
+    function handleDragStart(event) {
+        draggedIndex = event.currentTarget.dataset.index; // Store the index of the dragged item
+        event.dataTransfer.effectAllowed = "move";
+    }
+
+    function handleDragOver(event) {
+        event.preventDefault(); // Allow dropping
+        event.dataTransfer.dropEffect = "move";
+    }
+
+    function handleDrop(event) {
+        event.preventDefault();
+        const droppedIndex = event.currentTarget.dataset.index; // Get the index of the drop target
+
+        // Reorder the savedButtons array
+        const [movedItem] = savedButtons.splice(draggedIndex, 1); // Remove the dragged item
+        savedButtons.splice(droppedIndex, 0, movedItem); // Insert it at the new position
+
+        // Update localStorage and re-render the buttons
+        localStorage.setItem("userButtons", JSON.stringify(savedButtons));
+        renderButtons();
     }
 
     // Add event listeners to the .cat div
@@ -120,6 +277,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const iframeLinks = [
         "https://macaulaylibrary.org/asset/634338890/embed",
+        "https://macaulaylibrary.org/asset/635697221/embed",
+        "https://macaulaylibrary.org/asset/635697066/embed",
+        "https://macaulaylibrary.org/asset/635696434/embed",
+        "https://macaulaylibrary.org/asset/635695714/embed",
+        "https://macaulaylibrary.org/asset/635696072/embed",
         "https://macaulaylibrary.org/asset/279264501/embed",
         "https://macaulaylibrary.org/asset/614294678/embed",
         "https://macaulaylibrary.org/asset/269115571/embed",
@@ -500,7 +662,7 @@ document.addEventListener("DOMContentLoaded", () => {
         "https://macaulaylibrary.org/asset/146684391/embed",
         "https://macaulaylibrary.org/asset/148236341/embed",
         "https://macaulaylibrary.org/asset/257990691/embed",
-        "https://macaulaylibrary.org/asset/758261511/embed",
+        "https://macaulaylibrary.org/asset/75826151/embed",
         "https://macaulaylibrary.org/asset/627413139/embed",
         "https://macaulaylibrary.org/asset/284390461/embed",
         "https://macaulaylibrary.org/asset/630451413/embed",
@@ -531,7 +693,7 @@ document.addEventListener("DOMContentLoaded", () => {
         "https://macaulaylibrary.org/asset/623741350/embed",
         "https://macaulaylibrary.org/asset/625872984/embed",
         "https://macaulaylibrary.org/asset/555663011/embed",
-        "https://macaulaylibrary.org/asset/555665811/embed",
+        "https://macaulaylibrary.org/asset/55566581/embed",
         "https://macaulaylibrary.org/asset/88850151/embed",
         "https://macaulaylibrary.org/asset/89293331/embed",
         "https://macaulaylibrary.org/asset/139062371/embed",
@@ -574,8 +736,8 @@ document.addEventListener("DOMContentLoaded", () => {
         "https://macaulaylibrary.org/asset/172151091/embed",
         "https://macaulaylibrary.org/asset/210163521/embed",
         "https://macaulaylibrary.org/asset/443752771/embed",
-        "https://macaulaylibrary.org/asset/230348811/embed",
-        "https://macaulaylibrary.org/asset/683524711/embed",
+        "https://macaulaylibrary.org/asset/23034881/embed",
+        "https://macaulaylibrary.org/asset/68352471/embed",
         "https://macaulaylibrary.org/asset/238520141/embed",
         "https://macaulaylibrary.org/asset/188620411/embed",
         "https://macaulaylibrary.org/asset/116009761/embed",

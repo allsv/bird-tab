@@ -5,12 +5,28 @@
         <title>Pigeoncote</title>
         <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1" />
         <link rel="stylesheet" type="text/css" href="app.css" />
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&family=Eczar:wght@400..800&family=Fira+Code:wght@300..700&family=Nabla&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Patrick+Hand&family=Potta+One&family=Quintessential&family=Uncial+Antiqua&display=swap" rel="stylesheet">
     </head>
     <body>
         <div class="bird-title-container">
             <h1 class="bird-title"></h1>
-          </div>
-        <div class="cat"></div>
+        </div>
+        <div class="main-content">
+            <div class="cat-wrapper">
+                <div class="cat"></div>
+            </div>
+            <div class="button-container">
+                <div id="user-buttons"></div>
+                <button id="settings-button" class="cogwheel">⚙️</button>
+                <button id="font-button" class="fontfam">🔤</button>
+                <div id="settings-buttons">
+                    <button id="add-button">Add Shortcut</button>
+                    <button id="reset-button">Reset Shortcuts</button>
+                </div>
+            </div>
+        </div>
         <script src="app.js" type="module"></script>
     </body>
 </html>
