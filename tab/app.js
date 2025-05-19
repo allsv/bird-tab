@@ -151,8 +151,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
             const btn = document.createElement("button");
             btn.textContent = button.label;
-            btn.addEventListener("click", () => {
-                window.open(button.url, "_blank"); // Open the URL in a new tab
+            btn.addEventListener("mousedown", (e) => {
+                if (e.button === 0) {
+                    // Left click: open in the same tab
+                    window.location.href = button.url;
+                } else if (e.button === 1) {
+                    // Middle click: open in a new tab
+                    window.open(button.url, "_blank");
+                }
             });
 
             const removeBtn = document.createElement("button");
