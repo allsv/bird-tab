@@ -163,13 +163,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
             const btn = document.createElement("button");
             btn.textContent = button.label;
-            btn.addEventListener("mousedown", (e) => {
-                if (e.button === 0) {
-                    // Left click: open in the same tab
-                    window.location.href = button.url;
-                } else if (e.button === 1) {
-                    // Middle click: open in a new tab
-                    window.open(button.url, "_blank");
+            btn.addEventListener("click", (e) => {
+                if (isDragging) return; // don't navigate if a drag just happened
+                window.location.href = button.url; // left-click: same tab
+            });
+            btn.addEventListener("auxclick", (e) => {
+                if (isDragging) return;
+                if (e.button === 1) {
+                    window.open(button.url, "_blank"); // middle-click: new tab
                 }
             });
 
@@ -197,6 +198,7 @@ document.addEventListener("DOMContentLoaded", () => {
             buttonContainer.addEventListener("dragstart", handleDragStart);
             buttonContainer.addEventListener("dragover", handleDragOver);
             buttonContainer.addEventListener("drop", handleDrop);
+            buttonContainer.addEventListener("dragend", handleDragEnd);
         });
     }
 
@@ -265,9 +267,11 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     let draggedIndex = null;
+    let isDragging = false;
 
     function handleDragStart(event) {
         draggedIndex = event.currentTarget.dataset.index; // Store the index of the dragged item
+        isDragging = true;
         event.dataTransfer.effectAllowed = "move";
     }
 
@@ -281,12 +285,19 @@ document.addEventListener("DOMContentLoaded", () => {
         const droppedIndex = event.currentTarget.dataset.index; // Get the index of the drop target
 
         // Reorder the savedButtons array
-        const [movedItem] = savedButtons.splice(draggedIndex, 1); // Remove the dragged item
-        savedButtons.splice(droppedIndex, 0, movedItem); // Insert it at the new position
+        const from = parseInt(draggedIndex, 10);
+        const to = parseInt(droppedIndex, 10);
+        const [movedItem] = savedButtons.splice(from, 1); // Remove the dragged item
+        savedButtons.splice(to, 0, movedItem); // Insert it at the new position
 
         // Update localStorage and re-render the buttons
         localStorage.setItem("userButtons", JSON.stringify(savedButtons));
+        isDragging = false; // end drag
         renderButtons();
+    }
+
+    function handleDragEnd() {
+        isDragging = false; // safety: ensure we reset drag state
     }
 
     // Add event listeners to the .cat div
